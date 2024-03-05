@@ -1,8 +1,9 @@
 package SimuladorAeroporto;
 public class Aviao {
-	private static int ultimoId = 0;
+	
+	public static int ultimoId = 0;
 
-	private int id, combustivel, chegada, saida;
+	private int id, combustivel, tempoEspera = 0;
 	Aviao anterior, proximo;
 	
 	
@@ -41,20 +42,20 @@ public class Aviao {
 		this.proximo = proximo;
 	}
 	
-	public int getChegada() {
-		return chegada;
+	public int getTempoEspera() {
+		return tempoEspera;
 	}
 	
-	public void setChegada(int chegada) {
-		this.chegada = chegada;
+	public void setTempoEspera(int tempoEspera) {
+		this.tempoEspera = tempoEspera;
 	}
 	
-	public int getSaida() {
-		return saida;
+	public void adicionaTempoEspera() {
+		tempoEspera++;
 	}
 	
-	public void setSaida(int saida) {
-		this.saida = saida;
+	public int getUltimoId() {
+		return ultimoId;
 	}
 }
  

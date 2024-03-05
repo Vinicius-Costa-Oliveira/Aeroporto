@@ -1,26 +1,67 @@
 package SimuladorAeroporto;
 
 public class Decolagem {
-	private int chegada, saida;
-	Aviao aviao;
+	Aviao primeiroAviao, ultimoAviao;
+	int totalAvioes = 0;
 	
-	public int getChegada() {
-		return chegada;
+	public boolean ehVazia() {
+		if(totalAvioes == 0) {
+			return true;
+		}else return false;
 	}
 	
-	public void setChegada(int chegada) {
-		this.chegada = chegada;
+	public void adiciona(Aviao novoAviao) {
+		Aviao novo = new Aviao();
+		if(ehVazia()) {
+			primeiroAviao = novo;
+			ultimoAviao = novo;
+		}else {
+			novo.setProximo(null);
+			novo.setAnterior(ultimoAviao);
+			ultimoAviao.setProximo(novo);
+			ultimoAviao = novo;
+		}
+		totalAvioes++;
 	}
 	
-	public int getSaida() {
-		return saida;
+	public void remove() {
+		if(ehVazia()) {
+			throw new IllegalArgumentException("Fila Vazia.");
+		}else if(totalAvioes == 1) {
+			totalAvioes = 0;
+		}else {
+			Aviao segundo = primeiroAviao.getProximo();
+			segundo.setAnterior(null);
+			primeiroAviao = segundo;
+			totalAvioes--;
+		}
 	}
 	
-	public void setSaida(int saida) {
-		this.saida = saida;
+	public double tempoMedio() {
+		double mediaEspera = 0, aux = 0, soma = 0;
+		
+		
+		Aviao aviaoAtual = primeiroAviao;
+
+        while (aviaoAtual != null) {
+            soma = soma + aviaoAtual.getTempoEspera(); 
+            aviaoAtual = aviaoAtual.getProximo(); 
+            aux++;
+        }
+        
+        mediaEspera = soma/aux;
+		
+		return mediaEspera;
 	}
 	
-	public int calcular() {
-		return getSaida() - getChegada();
+	public void print() {
+		Aviao atual = primeiroAviao;
+		
+	System.out.println("Aterrisagem:");
+		
+		while (atual != null) {
+			System.out.println("Aviao: " + atual.getId());
+			atual = atual.getProximo(); 
+		}
 	}
 }
