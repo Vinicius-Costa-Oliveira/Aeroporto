@@ -11,18 +11,18 @@ public class Aterrisagem {
 	}
 	
 	public void adiciona(Aviao novoAviao) {
-		Aviao novo = new Aviao();
-		if(ehVazia()) {
-			primeiroAviao = novo;
-			ultimoAviao = novo;
-		}else {
-			novo.setProximo(null);
-			novo.setAnterior(ultimoAviao);
-			ultimoAviao.setProximo(novo);
-			ultimoAviao = novo;
-		}
-		totalAvioes++;
+	    if (ehVazia()) {
+	        primeiroAviao = novoAviao;
+	        ultimoAviao = novoAviao;
+	    } else {
+	        novoAviao.setProximo(null);
+	        novoAviao.setAnterior(ultimoAviao);
+	        ultimoAviao.setProximo(novoAviao);
+	        ultimoAviao = novoAviao;
+	    }
+	    totalAvioes++;
 	}
+
 	
 	public void remove() {
 		if(ehVazia()) {
@@ -37,26 +37,30 @@ public class Aterrisagem {
 		}
 	}
 	
-	public void removeCritico(Aviao aviao) {
-		if (totalAvioes == 1) {
-	        totalAvioes = 0;
-	        primeiroAviao = null; 
-	    } else {
-	        Aviao atual = primeiroAviao;
-	        while (atual != aviao) {
-	            atual = atual.getProximo();
+	public void removeCritico() {
+	    Aviao atual = primeiroAviao;
+
+	    while (atual != null) {
+	        if (atual.getCombustivel() <= 1) {
+	            Aviao proximo = atual.getProximo();
+	            Aviao anterior = atual.getAnterior();
+
+	            if (anterior == null) {
+	                primeiroAviao = proximo;
+	            } else {
+	                anterior.setProximo(proximo);
+	            }
+
+	            if (proximo != null) {
+	                proximo.setAnterior(anterior);
+	            }
+
+	            return; 
 	        }
-	        Aviao anterior = atual.getAnterior();
-	        Aviao proximo = atual.getProximo();
-	        if (atual == primeiroAviao) {
-	            primeiroAviao = proximo;
-	        }
-	        anterior.setProximo(proximo);
-	        if (proximo != null) {
-	            proximo.setAnterior(anterior);
-	        }
-	        totalAvioes--;
+
+	        atual = atual.getProximo();
 	    }
+	    totalAvioes--;
 	}
 	
 	public void removeCombustivel() {
@@ -85,23 +89,24 @@ public class Aterrisagem {
 		return mediaEspera;
 	}
 	
-	public Aviao verNivelCritico() {
-		 Aviao atual = primeiroAviao;
+	public boolean verNivelCritico() {
+	    Aviao atual = primeiroAviao;
 
-	        while (atual != null) {
-	            if (atual.getCombustivel() == 1) {
-	                return atual; 
-	            }
-	            atual = atual.getProximo();
+	    while (atual != null) {
+	        if (atual.getCombustivel() <= 1) {
+	            return true; 
 	        }
+	        atual = atual.getProximo();
+	    }
 
-	        return null;
+	    return false; 
 	}
+	
 	
 	public void print() {
 		Aviao atual = primeiroAviao;
 		
-	System.out.println("Aterrisagem:");
+		System.out.println("Aterrisagem:"); 
 		
 		while (atual != null) {
 			System.out.println("Aviao: " + atual.getId() + " || Combustivel: " + atual.getCombustivel());
@@ -110,6 +115,9 @@ public class Aterrisagem {
 	}
 
 	public int verPrimeiroItem() {
-		return primeiroAviao.getCombustivel();
+	    if (ehVazia()) {
+	        throw new IllegalStateException("Fila vazia.");
+	    }
+	    return primeiroAviao.getCombustivel();
 	}
 }
