@@ -3,7 +3,11 @@ package SimuladorAeroporto;
 public class Decolagem {
 	Aviao primeiroAviao, ultimoAviao;
 	int totalAvioes = 0;
-	
+		
+	public int getTotalAvioes() {
+		return totalAvioes;
+	}
+        
 	public boolean ehVazia() {
 		if(totalAvioes == 0) {
 			return true;

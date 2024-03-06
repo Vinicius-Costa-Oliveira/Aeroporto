@@ -1,10 +1,10 @@
 package SimuladorAeroporto;
 
 public class Pista {
-	private Aterrisagem aterrisagem1;
-        private Aterrisagem aterrisagem2;
-	private Decolagem decolagem;
-	private int menor;
+        Aterrisagem aterrisagem1;
+        Aterrisagem aterrisagem2;
+	Decolagem decolagem;
+	private int menorAt;
         private boolean id;
 	
         public Pista(boolean id){
@@ -30,17 +30,18 @@ public class Pista {
                 System.out.println("\n");
 	}
 
-	int qualEhMenor(){
-		menor = aterrisagem1.getTotalAvioes();
-		if(menor > aterrisagem2.getTotalAvioes())
-			menor = aterrisagem2.getTotalAvioes();
-			return menor;
+	int qualEhMenorAterrisagem(){
+		menorAt = aterrisagem1.getTotalAvioes();
+		if(menorAt > aterrisagem2.getTotalAvioes())
+			menorAt = aterrisagem2.getTotalAvioes();
+			return menorAt;
 	}
 
-	void inserir(){
-            if(menor == aterrisagem1.getTotalAvioes())
+	void inserirAterrisagem(){
+            if(menorAt == aterrisagem1.getTotalAvioes())
                 aterrisagem1.adiciona();
             else
                 aterrisagem2.adiciona();
 	}
+        
 }
