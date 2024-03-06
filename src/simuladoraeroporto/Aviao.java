@@ -10,7 +10,6 @@ public class Aviao {
 	public Aviao(){
 		id = ultimoId; 
 		combustivel = (int)Math.floor(Math.random() * (20 - 1 + 1) + 1);
-		System.out.println(combustivel);
 		ultimoId++;
 	}
 	

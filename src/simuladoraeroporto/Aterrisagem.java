@@ -78,18 +78,17 @@ public class Aterrisagem {
 	}
 	
 	public double tempoMedio() {
-		double mediaEspera = 0, aux = 0, soma = 0;
+		double mediaEspera = 0, soma = 0;
 		
 		
 		Aviao aviaoAtual = primeiroAviao;
 
         while (aviaoAtual != null) {
-            soma = soma + aviaoAtual.getTempoEspera(); 
+            soma += aviaoAtual.getTempoEspera(); 
             aviaoAtual = aviaoAtual.getProximo(); 
-            aux++;
         }
         
-        mediaEspera = soma/aux;
+        mediaEspera = soma/totalAvioes;
 		
 		return mediaEspera;
 	}
@@ -110,9 +109,7 @@ public class Aterrisagem {
 	
 	public void print() {
 		Aviao atual = primeiroAviao;
-		
-		System.out.println("Aterrisagem:"); 
-		
+
 		while (atual != null) {
 			System.out.println("Aviao: " + atual.getId() + " || Combustivel: " + atual.getCombustivel());
 			atual = atual.getProximo(); 

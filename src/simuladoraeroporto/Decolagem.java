@@ -44,21 +44,17 @@ public class Decolagem {
 		Aviao aviaoAtual = primeiroAviao;
 
         while (aviaoAtual != null) {
-            soma = soma + aviaoAtual.getTempoEspera(); 
+            soma += aviaoAtual.getTempoEspera(); 
             aviaoAtual = aviaoAtual.getProximo(); 
-            aux++;
         }
         
-        mediaEspera = soma/aux;
+        mediaEspera = soma/totalAvioes;
 		
 		return mediaEspera;
 	}
 	
 	public void print() {
 		Aviao atual = primeiroAviao;
-		
-	System.out.println("Aterrisagem:");
-		
 		while (atual != null) {
 			System.out.println("Aviao: " + atual.getId());
 			atual = atual.getProximo(); 
