@@ -104,13 +104,14 @@ public class Aterrisagem {
             aviaoAtual = aviaoAtual.getProximo(); 
         }
         mediaEspera = soma / totalAvioes;
-	if(soma != 0)	
+	if(soma != 0 && totalAvioes > 0)	
 		return mediaEspera;
 	return 0;
         }
 
         
 	public boolean verNivelCritico() {
+            if(totalAvioes > 0){
 	    Aviao atual = primeiroAviao;
 
 	    while (atual != null) {
@@ -119,7 +120,7 @@ public class Aterrisagem {
 	        }
 	        atual = atual.getProximo();
 	    }
-
+            }
 	    return false; 
 	}
 	
