@@ -1,11 +1,27 @@
-package SimuladorAeroporto;
+package simuladoraeroporto;
 
 public class Aeroporto {
 
-	private int insereAt, insereDc, temp;
+	private int insereAt, insereDc, temp, mortos = 0;
         Pista pista1 = new Pista(true);
         Pista pista2 = new Pista(true);
         Pista pista3 = new Pista(false);
+        
+        public static void main(String[] args) {
+        Aeroporto ae = new Aeroporto();
+            for(int i = 0; i < 5 ; i++){
+               ae.inserirAterrisagem();
+               ae.inserirDecolagem();
+               ae.pousarCriticos();
+               ae.contabilizar();
+               ae.decolarAvioes();
+               ae.pousarAvioes();
+               ae.combustivel();
+               ae.tela(i+1);
+               ae.tempo();
+               ae.recomecar();
+            }
+    }
         
         int aleatorio(int min, int max){
             return (int)Math.floor(Math.random() * (max - min + min) + min);
@@ -41,33 +57,76 @@ public class Aeroporto {
                insereDc = 3;
            }
            
-           if(insereDc == 1)
-               pista1.decolagem.adiciona();
-           else if(insereDc == 2)
-                pista2.decolagem.adiciona();
-           else
-                pista3.decolagem.adiciona();
+               switch (insereDc) {
+                   case 1 -> pista1.decolagem.adiciona();
+                   case 2 -> pista2.decolagem.adiciona();
+                   default -> pista3.decolagem.adiciona();
+               }
 	}
        }
         
-        void tela(){
-                System.out.println("Pista 1:");
+        void tela(int turno){
+                System.out.println("-----------------------------------------");
+                System.out.println("\t\tTurno " + turno);
+                System.out.println("\tTotal de Avioes Perdidos: " + mortos);
+                System.out.println("\nPista 1:\n");
 		pista1.mostrarTodos();
                 System.out.println("\n");
-                System.out.println("Pista 2:");
+                System.out.println("~~~~~~~~~~");
+                System.out.println("Pista 2:\n");
 		pista2.mostrarTodos();
                 System.out.println("\n");
-                System.out.println("Pista 3:");
+                System.out.println("~~~~~~~~~~");
+                System.out.println("Pista 3:\n");
 		pista3.mostrarTodos();
                 System.out.println("\n");
         }
         
-	public Aeroporto() {
-            for(int i = 0; i < 1 ; i++){
-                inserirAterrisagem();
-                inserirDecolagem();
+        void combustivel(){
+            pista1.removerCombustivelDeTodos();
+            pista2.removerCombustivelDeTodos();
+        }
+        
+        void tempo(){
+            pista1.aumentarTempoEsperaDeTodos();
+            pista2.aumentarTempoEsperaDeTodos();
+            pista3.aumentarTempoEsperaDeTodos();
+        }
+        
+        void pousarCriticos(){
+            pista1.analisarCritico();
+            if(pista1.getEmergencia()){
+                pista1.aterrisagem2.removeCritico();
+                pista3.setOcupado();
+            }
             
-                tela();
+            pista2.analisarCritico();
+            if(pista2.getEmergencia() && !pista3.getOcupado()){
+                pista1.aterrisagem2.removeCritico();
             }
         }
+      
+        void pousarAvioes(){
+            pista1.removerNormal();
+            pista2.removerNormal();
+        }
+        
+        void decolarAvioes(){
+            pista1.decolar();
+            pista2.decolar();
+            pista3.decolar();
+        }
+        
+        void contabilizar(){
+            mortos += pista1.contabilizarPerdidos();
+            mortos += pista2.contabilizarPerdidos();
+        }
+        
+        void recomecar(){
+            pista1.reiniciar();
+            pista2.reiniciar();
+            pista3.reiniciar();
+        }
 }
+        
+
