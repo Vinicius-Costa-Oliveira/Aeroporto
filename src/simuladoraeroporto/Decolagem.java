@@ -54,9 +54,9 @@ public class Decolagem {
         }
         
         mediaEspera = soma / totalAvioes;
-	if(soma != 0)	
-		return mediaEspera;
-	return 0;
+	if(soma <= 0 || totalAvioes <= 0)	
+            return 0;
+        return mediaEspera;
 	}
         
         public void adicionaTempoEspera() {

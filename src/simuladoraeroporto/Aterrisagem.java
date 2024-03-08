@@ -96,17 +96,16 @@ public class Aterrisagem {
 	public double tempoMedio() {
 	double mediaEspera, soma = 0;
 		
-		
-		Aviao aviaoAtual = primeiroAviao;
+	Aviao aviaoAtual = primeiroAviao;
 
         while (aviaoAtual != null) {
             soma += aviaoAtual.getTempoEspera(); 
             aviaoAtual = aviaoAtual.getProximo(); 
         }
         mediaEspera = soma / totalAvioes;
-	if(soma != 0 && totalAvioes > 0)	
-		return mediaEspera;
-	return 0;
+	if(soma <= 0 || totalAvioes <= 0)	
+            return 0;
+        return mediaEspera;
         }
 
         
