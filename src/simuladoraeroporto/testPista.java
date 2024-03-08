@@ -65,7 +65,7 @@ class testPista {
 
     @Test
     void testContabilizarPerdidos() {
-    	/*
+    	
         pistaAterrisagem.aterrisagem1.adiciona(); 
 
         while (pistaAterrisagem.aterrisagem1.primeiroAviao.getCombustivel() > 1) {
@@ -73,9 +73,11 @@ class testPista {
         }
 
         assertEquals(1, pistaAterrisagem.contabilizarPerdidos());
-        */
+        
     }
 
+    
+    
     @Test
     void testReiniciar() {
         pistaAterrisagem.setOcupado();

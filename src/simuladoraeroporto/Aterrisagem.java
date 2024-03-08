@@ -44,31 +44,43 @@ public class Aterrisagem {
 	        }
 	    }
 	}
+	
 	public void removeCritico() {
-	    Aviao atual = primeiroAviao;
+        Aviao atual = primeiroAviao;
 
-	    while (atual != null) {
-	        if (atual.getCombustivel() > 1) {
-	            Aviao proximo = atual.getProximo();
-	            Aviao anterior = atual.getAnterior();
+        while (atual != null) {
+            if(atual.getCombustivel() == 1) {
+                if(atual == primeiroAviao) {
+                    if(totalAvioes == 1) {
+                        totalAvioes = 0;
+                        return;
+                    }else {
+                        Aviao segundo = primeiroAviao.getProximo();
+                        segundo.setAnterior(null);
+                        primeiroAviao = segundo;
+                        totalAvioes--;
+                        return;
+                    }
+                }else if(atual == ultimoAviao) {
+                    Aviao penultimo = ultimoAviao.getAnterior();
+                    penultimo.setProximo(null);
+                    ultimoAviao = penultimo;
+                    totalAvioes--;
+                    return;
+                }else {
+                    Aviao proximo, anterior;
+                    proximo = atual.getProximo();
+                    anterior = atual.getAnterior ();
+                    proximo.setAnterior(anterior);
+                    anterior.setProximo(proximo);
+                    totalAvioes--;
+                    return;
+                }
+            }
+            atual = atual.getProximo();
+        }
 
-	            if (anterior == null) {
-	                primeiroAviao = proximo;
-	            } else {
-	                anterior.setProximo(proximo);
-	            }
-
-	            if (proximo != null) {
-	                proximo.setAnterior(anterior);
-	            }
-
-	            return; 
-	        }
-
-	        atual = atual.getProximo();
-	    }
-	    totalAvioes--;
-	}
+    }
 	
 	 public void removeCombustivel() {
 	        Aviao atual = primeiroAviao;

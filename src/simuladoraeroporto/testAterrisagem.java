@@ -58,20 +58,45 @@ class testAterrisagem {
     }
 
     @Test
-    void testRemoveCritico() {
+    void testRemoveCriticoNoComeco() {
         Aviao aviaoCritico = new Aviao();
         fila.primeiroAviao = aviaoCritico;
         fila.totalAvioes = 1;
-    	
+
         while(aviaoCritico.getCombustivel() > 1) {
             aviaoCritico.opala();
         }
-
         fila.removeCritico();
-
         assertEquals(0, fila.getTotalAvioes());
-
     }
+
+    @Test
+    void testRemoveCriticoNoFinal() {
+    	fila.adiciona();
+    	fila.adiciona();
+    	fila.adiciona();
+    	fila.adiciona();
+
+        while(fila.primeiroAviao.getCombustivel() > 1) {
+            fila.primeiroAviao.opala();
+        }
+        fila.removeCritico();
+        assertEquals(3, fila.getTotalAvioes());
+    }
+
+    @Test
+    void testRemoveCriticoNoMeio() {
+    	fila.adiciona();
+    	fila.adiciona();
+    	fila.adiciona();
+
+        while(fila.primeiroAviao.getProximo().getCombustivel() > 1) {
+        	fila.primeiroAviao.getProximo().opala();
+        }
+        fila.removeCritico();
+        assertEquals(2, fila.getTotalAvioes());
+    }
+    
     @Test
     void testRemoveCombustivel() {
         Aviao aviao = new Aviao();
