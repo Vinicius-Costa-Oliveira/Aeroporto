@@ -32,7 +32,7 @@ class testPista {
 
     @Test
     void testDecolarComPistaAterrisagem() {
-        pistaAterrisagem.aterrisagem1.adiciona();
+        pistaAterrisagem.decolagem.adiciona();
         pistaAterrisagem.decolar();
         assertTrue(pistaAterrisagem.getOcupado());
     }
@@ -72,6 +72,8 @@ class testPista {
             pistaAterrisagem.aterrisagem1.primeiroAviao.opala();
         }
 
+        pistaAterrisagem.analisarCritico();
+        
         assertEquals(1, pistaAterrisagem.contabilizarPerdidos());
         
     }
