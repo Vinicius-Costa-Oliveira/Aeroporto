@@ -1,4 +1,4 @@
-package SimuladorAeroporto;
+package simuladoraeroporto;
 
 public class Aterrisagem {
 	Aviao primeiroAviao, ultimoAviao;
@@ -28,20 +28,27 @@ public class Aterrisagem {
 	    totalAvioes++;
 	}
 
-	
-	public void remove() {
-		if(ehVazia()) {
+        	public void remove() {
+		/*if(ehVazia()) {
 			throw new IllegalArgumentException("Fila Vazia.");
-		}else if(totalAvioes == 1) {
+		}else 
+                        PARTE QUE SERA REMOVIDA DO CODIGO, SO PERMANECE PARA 
+                    SEU ENTENDIMENTO*/
+                if(totalAvioes == 1) {
+		if(!ehVazia()) {
+			
+		if(totalAvioes == 1) {
 			totalAvioes = 0;
 		}else {
 			Aviao segundo = primeiroAviao.getProximo();
-			segundo.setAnterior(null);
+
+
 			primeiroAviao = segundo;
 			totalAvioes--;
 		}
+        }
 	}
-	
+    }
 	public void removeCritico() {
 	    Aviao atual = primeiroAviao;
 
@@ -69,7 +76,7 @@ public class Aterrisagem {
 	}
 	
 	public void removeCombustivel() {
-		Aviao atual = primeiroAviao;
+	Aviao atual = primeiroAviao;
 
         while (atual != null) {
             atual.opala(); 
@@ -77,8 +84,17 @@ public class Aterrisagem {
         }
 	}
 	
+	public void adicionaTempoEspera() {
+		Aviao atual = primeiroAviao;
+
+        while (atual != null) {
+            atual.adicionaTempoEspera(); 
+            atual = atual.getProximo(); 
+        }
+	}
+	
 	public double tempoMedio() {
-		double mediaEspera = 0, soma = 0;
+	double mediaEspera, soma = 0;
 		
 		
 		Aviao aviaoAtual = primeiroAviao;
@@ -87,13 +103,15 @@ public class Aterrisagem {
             soma += aviaoAtual.getTempoEspera(); 
             aviaoAtual = aviaoAtual.getProximo(); 
         }
-        
-        mediaEspera = soma/totalAvioes;
-		
+        mediaEspera = soma / totalAvioes;
+	if(soma != 0 && totalAvioes > 0)	
 		return mediaEspera;
-	}
-	
+	return 0;
+        }
+
+        
 	public boolean verNivelCritico() {
+            if(totalAvioes > 0){
 	    Aviao atual = primeiroAviao;
 
 	    while (atual != null) {
@@ -102,7 +120,7 @@ public class Aterrisagem {
 	        }
 	        atual = atual.getProximo();
 	    }
-
+            }
 	    return false; 
 	}
 	
@@ -117,9 +135,10 @@ public class Aterrisagem {
 	}
 
 	public int verPrimeiroItem() {
-	    if (ehVazia()) {
-	        throw new IllegalStateException("Fila vazia.");
-	    }
+	    if (ehVazia()) 
+	        return 21;
+	    
+            else
 	    return primeiroAviao.getCombustivel();
 	}
 }

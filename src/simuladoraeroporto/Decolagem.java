@@ -1,4 +1,4 @@
-package SimuladorAeroporto;
+package simuladoraeroporto;
 
 public class Decolagem {
 	Aviao primeiroAviao, ultimoAviao;
@@ -29,9 +29,9 @@ public class Decolagem {
 	}
 	
 	public void remove() {
-		if(ehVazia()) {
-			throw new IllegalArgumentException("Fila Vazia.");
-		}else if(totalAvioes == 1) {
+		if(!ehVazia()) {
+			
+		if(totalAvioes == 1) {
 			totalAvioes = 0;
 		}else {
 			Aviao segundo = primeiroAviao.getProximo();
@@ -39,10 +39,11 @@ public class Decolagem {
 			primeiroAviao = segundo;
 			totalAvioes--;
 		}
+        }
 	}
 	
 	public double tempoMedio() {
-		double mediaEspera = 0, aux = 0, soma = 0;
+		double mediaEspera = 0, soma = 0;
 		
 		
 		Aviao aviaoAtual = primeiroAviao;
@@ -52,9 +53,19 @@ public class Decolagem {
             aviaoAtual = aviaoAtual.getProximo(); 
         }
         
-        mediaEspera = soma/totalAvioes;
-		
+        mediaEspera = soma / totalAvioes;
+	if(soma != 0)	
 		return mediaEspera;
+	return 0;
+	}
+        
+        public void adicionaTempoEspera() {
+        Aviao atual = primeiroAviao;
+
+        while (atual != null) {
+            atual.adicionaTempoEspera(); 
+            atual = atual.getProximo(); 
+        }
 	}
 	
 	public void print() {
