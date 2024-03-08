@@ -71,8 +71,6 @@ class testPista {
         while (pistaAterrisagem.aterrisagem1.primeiroAviao.getCombustivel() > 1) {
             pistaAterrisagem.aterrisagem1.primeiroAviao.opala();
         }
-
-        pistaAterrisagem.analisarCritico();
         
         assertEquals(1, pistaAterrisagem.contabilizarPerdidos());
         
