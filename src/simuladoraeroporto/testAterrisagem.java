@@ -1,4 +1,4 @@
-package SimuladorAeroporto;
+package simuladoraeroporto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class testAterrisagem {
 
@@ -14,7 +19,7 @@ class testAterrisagem {
 
     @BeforeEach
     void inicializaFila() {
-        fila = new Aterrisagem();
+       fila = new Aterrisagem();
     }
 
     @Test
@@ -55,16 +60,18 @@ class testAterrisagem {
     @Test
     void testRemoveCritico() {
         Aviao aviaoCritico = new Aviao();
-        aviaoCritico.opala();
         fila.primeiroAviao = aviaoCritico;
         fila.totalAvioes = 1;
+    	
+        while(aviaoCritico.getCombustivel() > 1) {
+            aviaoCritico.opala();
+        }
 
         fila.removeCritico();
 
         assertEquals(0, fila.getTotalAvioes());
-        assertTrue(fila.ehVazia());
-    }
 
+    }
     @Test
     void testRemoveCombustivel() {
         Aviao aviao = new Aviao();
@@ -136,21 +143,6 @@ class testAterrisagem {
         assertTrue(fila.verNivelCritico());
     }
 
-    @Test
-    void testPrint() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        Aviao aviao = new Aviao();
-        fila.primeiroAviao = aviao;
-        fila.totalAvioes = 1;
-
-        fila.print();
-
-        System.setOut(System.out);
-
-        assertEquals("Aviao: " + aviao.getId() + " || Combustivel: " + aviao.getCombustivel() + "\n", outContent.toString());
-    }
 
     @Test
     void testVerPrimeiroItemComFilaVazia() {

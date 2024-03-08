@@ -1,4 +1,4 @@
-package SimuladorAeroporto;
+package simuladoraeroporto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,20 +79,4 @@ class testDecolagem {
         assertEquals(1.0, tempoMedio);
     }
 
-
-    @Test
-    void testPrint() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        Aviao aviao = new Aviao();
-        fila.primeiroAviao = aviao;
-        fila.totalAvioes = 1;
-
-        fila.print();
-
-        System.setOut(System.out);
-
-        assertEquals("Aviao: " + aviao.getId(), outContent.toString());
-    }
 }

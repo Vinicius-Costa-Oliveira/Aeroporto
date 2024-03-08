@@ -1,4 +1,4 @@
-package SimuladorAeroporto;
+package simuladoraeroporto;
 
 public class Aterrisagem {
 	Aviao primeiroAviao, ultimoAviao;
@@ -48,7 +48,7 @@ public class Aterrisagem {
 	    Aviao atual = primeiroAviao;
 
 	    while (atual != null) {
-	        if (atual.getCombustivel() <= 1) {
+	        if (atual.getCombustivel() > 1) {
 	            Aviao proximo = atual.getProximo();
 	            Aviao anterior = atual.getAnterior();
 
@@ -108,7 +108,7 @@ public class Aterrisagem {
         Aviao atual = primeiroAviao;
 
         while (atual != null) {
-            if (atual.getCombustivel() <= 1) {
+            if (atual.getCombustivel() == 1) {
                 return true;
             }
             atual = atual.getProximo();

@@ -1,4 +1,4 @@
-package SimuladorAeroporto;
+package simuladoraeroporto;
 
 public class Decolagem {
 	Aviao primeiroAviao, ultimoAviao;
