@@ -1,4 +1,4 @@
-package simuladoraeroporto;
+package SimuladorAeroporto;
 
 public class Pista {
         Aterrisagem aterrisagem1;
@@ -101,8 +101,8 @@ public class Pista {
         }
         
         
-        int contabilizarPerdidos(){
-            int perdidos = 0;
+        public int contabilizarPerdidos(){
+        	int perdidos = 0;
             
             while(aterrisagem1.verNivelCritico())
                 perdidos++;
