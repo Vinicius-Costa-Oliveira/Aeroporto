@@ -1,4 +1,4 @@
-package simuladoraeroporto;
+package SimuladorAeroporto;
 
 public class Aterrisagem {
 	Aviao primeiroAviao, ultimoAviao;
@@ -28,27 +28,22 @@ public class Aterrisagem {
 	    totalAvioes++;
 	}
 
-        	public void remove() {
-		/*if(ehVazia()) {
-			throw new IllegalArgumentException("Fila Vazia.");
-		}else 
-                        PARTE QUE SERA REMOVIDA DO CODIGO, SO PERMANECE PARA 
-                    SEU ENTENDIMENTO*/
-                if(totalAvioes == 1) {
-		if(!ehVazia()) {
-			
-		if(totalAvioes == 1) {
-			totalAvioes = 0;
-		}else {
-			Aviao segundo = primeiroAviao.getProximo();
+	public void remove() {
+	    if (ehVazia()) {
+	        totalAvioes = 0;
+	    } else if (totalAvioes == 1) {
+	        totalAvioes = 0;
+	    } else {
+	        Aviao segundo = primeiroAviao.getProximo();
 
+	        if (segundo != null) {
+	            primeiroAviao = segundo;
+	            segundo.setAnterior(null);
 
-			primeiroAviao = segundo;
-			totalAvioes--;
-		}
-        }
+	            totalAvioes--;
+	        }
+	    }
 	}
-    }
 	public void removeCritico() {
 	    Aviao atual = primeiroAviao;
 
@@ -75,14 +70,14 @@ public class Aterrisagem {
 	    totalAvioes--;
 	}
 	
-	public void removeCombustivel() {
-	Aviao atual = primeiroAviao;
+	 public void removeCombustivel() {
+	        Aviao atual = primeiroAviao;
 
-        while (atual != null) {
-            atual.opala(); 
-            atual = atual.getProximo(); 
-        }
-	}
+	        while (atual != null) {
+	            atual.opala();
+	            atual = atual.getProximo();
+	        }
+	    }
 	
 	public void adicionaTempoEspera() {
 		Aviao atual = primeiroAviao;
@@ -110,34 +105,32 @@ public class Aterrisagem {
 
         
 	public boolean verNivelCritico() {
-            if(totalAvioes > 0){
-	    Aviao atual = primeiroAviao;
+        Aviao atual = primeiroAviao;
 
-	    while (atual != null) {
-	        if (atual.getCombustivel() <= 1) {
-	            return true; 
-	        }
-	        atual = atual.getProximo();
-	    }
+        while (atual != null) {
+            if (atual.getCombustivel() <= 1) {
+                return true;
             }
-	    return false; 
-	}
+            atual = atual.getProximo();
+        }
+
+        return false;
+    }
 	
 	
 	public void print() {
-		Aviao atual = primeiroAviao;
+        Aviao atual = primeiroAviao;
 
-		while (atual != null) {
-			System.out.println("Aviao: " + atual.getId() + " || Combustivel: " + atual.getCombustivel());
-			atual = atual.getProximo(); 
-		}
-	}
+        while (atual != null) {
+            System.out.println("Aviao: " + atual.getId() + " || Combustivel: " + atual.getCombustivel());
+            atual = atual.getProximo();
+        }
+    }
 
 	public int verPrimeiroItem() {
-	    if (ehVazia()) 
+	    if (ehVazia() || primeiroAviao == null) 
 	        return 21;
-	    
-            else
-	    return primeiroAviao.getCombustivel();
+	    else
+	        return primeiroAviao.getCombustivel();
 	}
 }

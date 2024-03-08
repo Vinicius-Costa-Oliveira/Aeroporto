@@ -1,4 +1,4 @@
-package simuladoraeroporto;
+package SimuladorAeroporto;
 public class Aviao {
 	
 	public static int ultimoId = 0;
