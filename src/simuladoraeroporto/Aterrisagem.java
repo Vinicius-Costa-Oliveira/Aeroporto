@@ -29,20 +29,18 @@ public class Aterrisagem {
 	}
 
 	public void remove() {
-	    if (ehVazia()) {
-	        totalAvioes = 0;
-	    } else if (totalAvioes == 1) {
-	        totalAvioes = 0;
-	    } else {
-	        Aviao segundo = primeiroAviao.getProximo();
+		if (!ehVazia()) {
+			
+		primeiroAviao = primeiroAviao.getProximo();
 
-	        if (segundo != null) {
-	            primeiroAviao = segundo;
-	            segundo.setAnterior(null);
-
-	            totalAvioes--;
-	        }
-	    }
+		if (totalAvioes > 1) {
+			primeiroAviao.setAnterior(null);
+		}
+		else {
+			ultimoAviao = null;
+		}
+		totalAvioes--;
+		}
 	}
 	
 	public void removeCritico() {
@@ -51,36 +49,32 @@ public class Aterrisagem {
         while (atual != null) {
             if(atual.getCombustivel() == 1) {
                 if(atual == primeiroAviao) {
-                    if(totalAvioes == 1) {
-                        totalAvioes = 0;
-                        return;
-                    }else {
-                        Aviao segundo = primeiroAviao.getProximo();
-                        segundo.setAnterior(null);
-                        primeiroAviao = segundo;
-                        totalAvioes--;
+                        remove();
                         return;
                     }
-                }else if(atual == ultimoAviao) {
-                    Aviao penultimo = ultimoAviao.getAnterior();
-                    penultimo.setProximo(null);
-                    ultimoAviao = penultimo;
-                    totalAvioes--;
+                else if(atual == ultimoAviao) {
+                	Aviao penultima = ultimoAviao.getAnterior();
+        			penultima.setProximo(null);
+        			ultimoAviao = penultima;
+        			totalAvioes--;
                     return;
                 }else {
-                    Aviao proximo, anterior;
-                    proximo = atual.getProximo();
-                    anterior = atual.getAnterior ();
+                	Aviao proximo, anterior;
+                	proximo = atual.getProximo();
+                    anterior = atual.getAnterior();
                     proximo.setAnterior(anterior);
                     anterior.setProximo(proximo);
                     totalAvioes--;
                     return;
-                }
+                }     
             }
             atual = atual.getProximo();
         }
+	}
+    
+        
 
-    }
+	
 	
 	 public void removeCombustivel() {
 	        Aviao atual = primeiroAviao;

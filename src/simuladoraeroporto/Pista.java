@@ -87,7 +87,7 @@ public class Pista {
         
         void decolar(){
             if(id){
-                if(!getOcupado() && aterrisagem1.verPrimeiroItem() > 10 && aterrisagem2.verPrimeiroItem() > 10 ){
+                if((!getOcupado() && aterrisagem1.verPrimeiroItem() > 10 && aterrisagem2.verPrimeiroItem() > 10) || (!getOcupado() && aterrisagem1.verPrimeiroItem() > 4 && aterrisagem2.verPrimeiroItem() > 4 && decolagem.getTotalAvioes() > 4)){
                     decolagem.remove();
                     ocupado = true;
                 }

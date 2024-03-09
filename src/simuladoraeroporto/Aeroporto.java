@@ -9,7 +9,7 @@ public class Aeroporto {
         
         public static void main(String[] args) {
         Aeroporto ae = new Aeroporto();
-            for(int i = 0; i < 5 ; i++){
+            for(int i = 0; i < 10 ; i++){
                ae.inserirAterrisagem();
                ae.inserirDecolagem();
                ae.pousarCriticos();
