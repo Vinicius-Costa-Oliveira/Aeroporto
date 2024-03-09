@@ -9,15 +9,15 @@ public class Aeroporto {
         
         public static void main(String[] args) {
         Aeroporto ae = new Aeroporto();
-            for(int i = 0; i < 10 ; i++){
+            for(int i = 0; i < 100 ; i++){
                ae.inserirAterrisagem();
                ae.inserirDecolagem();
+               ae.tela(i+1);
                ae.pousarCriticos();
                ae.contabilizar();
                ae.decolarAvioes();
                ae.pousarAvioes();
                ae.combustivel();
-               ae.tela(i+1);
                ae.tempo();
                ae.recomecar();
             }

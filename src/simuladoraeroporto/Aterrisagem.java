@@ -30,7 +30,6 @@ public class Aterrisagem {
 
 	public void remove() {
 		if (!ehVazia()) {
-			
 		primeiroAviao = primeiroAviao.getProximo();
 
 		if (totalAvioes > 1) {
@@ -71,11 +70,7 @@ public class Aterrisagem {
             atual = atual.getProximo();
         }
 	}
-    
-        
 
-	
-	
 	 public void removeCombustivel() {
 	        Aviao atual = primeiroAviao;
 
